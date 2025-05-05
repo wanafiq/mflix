@@ -1,4 +1,6 @@
 const { graphql, buildSchema } = require("graphql");
+var express = require("express");
+var { createHandler } = require("graphql-http/lib/use/express");
 
 // Construct a schema, using GraphQL schema language
 const schema = buildSchema(`
@@ -11,18 +13,22 @@ const schema = buildSchema(`
 // The rootValue provides a resolver function for each API endpoint
 const rootValue = {
   hello() {
-    return "Hello world!";
+    return "Hello world!!";
   },
   age() {
     return 14;
   },
 };
 
-// Run the GraphQL query '{ hello }' and print out the response
-graphql({
-  schema,
-  source: "{ age }",
-  rootValue,
-}).then((response) => {
-  console.log(response);
-});
+const app = express();
+
+app.all(
+  "/graphql",
+  createHandler({
+    schema: schema,
+    rootValue: rootValue,
+  }),
+);
+
+app.listen(8080);
+console.log("Api running on : http://localhost:8080");
