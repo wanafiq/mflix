@@ -1,6 +1,6 @@
 import express from "express";
 import { ruruHTML } from "ruru/server";
-import { createYoga, createSchema } from "graphql-yoga";
+import { createYoga } from "graphql-yoga";
 
 import "dotenv/config.js";
 import { setupDatabase } from "./src/mongo/index.js";
