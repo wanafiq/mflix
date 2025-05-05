@@ -3,8 +3,8 @@ import { ruruHTML } from "ruru/server";
 import { createYoga } from "graphql-yoga";
 
 import "dotenv/config.js";
-import { setupDatabase } from "./src/mongo/index.js";
-import { schema } from "./src/graphql/index.js";
+import { setupDatabase } from "./mongo/index.js";
+import { schema } from "./graphql/index.js";
 
 const yoga = createYoga({
   schema,
