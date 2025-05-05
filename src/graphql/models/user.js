@@ -3,6 +3,10 @@ export const typeDef = `
     user: User
   }
   
+  type Mutation {
+    createUser(name: String!): User
+  }
+  
   type User {
     id: Int
     name: String
@@ -15,6 +19,17 @@ export const resolvers = {
       return {
         id: 1,
         name: "wan",
+      };
+    },
+  },
+
+  Mutation: {
+    createUser: (_, { name }) => {
+      // insert to db
+
+      return {
+        id: 1,
+        name,
       };
     },
   },
