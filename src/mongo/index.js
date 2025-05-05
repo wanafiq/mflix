@@ -1,7 +1,9 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 
-const uri =
-  "mongodb+srv://feed:QVhJvTJebL9gwy6z@feed-cluster.ueynt4l.mongodb.net/?retryWrites=true&w=majority&appName=feed-cluster";
+const uri = process.env.DATABASE_URL;
+if (!uri) {
+  throw new Error("DATABASE_URL is missing");
+}
 
 const client = new MongoClient(uri, {
   serverApi: {
