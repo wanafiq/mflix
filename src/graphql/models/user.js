@@ -4,12 +4,18 @@ export const typeDef = `
   }
   
   type Mutation {
-    createUser(name: String!): User
+    createUser(user: CreateUserInput!): User
+  }
+  
+  input CreateUserInput {
+    name: String
+    age: Int
   }
   
   type User {
     id: Int
     name: String
+    age: Int
   }
 `;
 
@@ -19,17 +25,18 @@ export const resolvers = {
       return {
         id: 1,
         name: "wan",
+        age: 18,
       };
     },
   },
 
   Mutation: {
-    createUser: (_, { name }) => {
+    createUser: (_, { user }) => {
       // insert to db
 
       return {
         id: 1,
-        name,
+        ...user,
       };
     },
   },
