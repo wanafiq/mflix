@@ -1,6 +1,7 @@
 const { graphql, buildSchema } = require("graphql");
 var express = require("express");
 var { createHandler } = require("graphql-http/lib/use/express");
+var { ruruHTML } = require("ruru/server");
 
 // Construct a schema, using GraphQL schema language
 const schema = buildSchema(`
@@ -29,6 +30,11 @@ app.all(
     rootValue: rootValue,
   }),
 );
+
+app.get("/", (_req, res) => {
+  res.type("html");
+  res.end(ruruHTML({ endpoint: "/graphql" }));
+});
 
 app.listen(8080);
 console.log("Api running on : http://localhost:8080");
